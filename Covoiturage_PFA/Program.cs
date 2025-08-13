@@ -1,4 +1,4 @@
-//var builder = WebApplication.CreateBuilder(args);
+Ôªø//var builder = WebApplication.CreateBuilder(args);
 
 //// Add services to the container.
 
@@ -33,14 +33,14 @@ using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Ajouter la chaÓne de connexion
+// Ajouter la cha√Æne de connexion
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
 // Ajouter DbContext avec EF Core (par exemple SQL Server)
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 
-// Ajouter Identity (avec les options par dÈfaut, tu peux personnaliser si besoin)
+// Ajouter Identity (avec les options par d√©faut, tu peux personnaliser si besoin)
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 {
     options.Password.RequireDigit = true;
@@ -56,13 +56,14 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend", policy =>
     {
-        policy.WithOrigins("http://localhost:8080") // URL et port de frontend
+        policy.WithOrigins("http://localhost:8081")
               .AllowAnyHeader()
-              .AllowAnyMethod();
+              .AllowAnyMethod()
+              .AllowCredentials(); // ‚Üê seulement si tu utilises cookies ou tokens dans headers
     });
 });
 
-// Ajouter les contrÙleurs
+// Ajouter les contr√¥leurs
 builder.Services.AddControllers();
 
 // Swagger (pour API documentation)
@@ -77,9 +78,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseCors("AllowFrontend");
 
 app.UseHttpsRedirection();
-app.UseCors("AllowFrontend");
 
 // IMPORTANT : Authentication avant Authorization
 app.UseAuthentication();

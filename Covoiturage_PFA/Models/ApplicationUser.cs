@@ -14,6 +14,8 @@ namespace Covoiturage_PFA.Models
         public ICollection<Trajet> TrajetsConducteur { get; set; }
         public ICollection<TrajetPassager> ReservationsPassager { get; set; }
         public string Role { get; set; }
+        public int StatusId { get; set; }
+        public Status Status { get; set; }
 
 
     }

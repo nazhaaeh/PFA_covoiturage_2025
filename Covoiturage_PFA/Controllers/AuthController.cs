@@ -55,7 +55,7 @@ namespace Covoiturage_PFA.Controllers
 
         //    var result = await _userManager.CreateAsync(user, model.Password);
 
-        //    if (!result.Succeeded)
+        //    if (!result.Succeeded)s
         //    {
         //        return BadRequest(result.Errors);
         //    }

@@ -196,9 +196,13 @@ namespace Covoiturage_PFA.Controllers
             return Ok(new
             {
                 message = "Connexion réussie",
+                userId = user.Id,
                 username = user.UserName,
                 email = user.Email,
-                //roles = roles
+                nom = user.Nom,
+                prenom = user.Prenom,
+                role = roles.FirstOrDefault()
+
             });
         }
         [HttpGet("Getdemandeprofil")]
